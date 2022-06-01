@@ -12,6 +12,7 @@ import  rentingRoutes from './routes/rentingRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import gardenRoutes from "./routes/gardenRoutes.js";
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
+app.use('/api/garden', gardenRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/rentings', rentingRoutes)
 app.use('/api/blogs', blogRoutes)

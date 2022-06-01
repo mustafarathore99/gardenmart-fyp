@@ -1,48 +1,47 @@
-
-import  mongoose from 'mongoose' 
+import mongoose from 'mongoose'
 // const { default: Reviews } = require('./ReviewModel')
-const reviewSchema=mongoose.Schema({
-    name: { type: String, required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true },
+const reviewSchema = mongoose.Schema({
+    name: {type: String, required: true},
+    rating: {type: Number, required: true},
+    comment: {type: String, required: true},
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
     },
-},{timestamps:true})
+}, {timestamps: true})
 
 
-const blogSchema=mongoose.Schema({
-    user:{
-    type:mongoose.Schema.Types.ObjectId,
-    required:true,
-    ref:'User'
-    // ref:`User`
+const blogSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+        // ref:`User`
     },
-    name:{
-    type:String
+    name: {
+        type: String
     },
-    image:{
-        type:String
+    image: {
+        type: String
     },
-    description:{
-        type:String
+    description: {
+        type: String
     },
-    reviews:[reviewSchema],
+    reviews: [reviewSchema],
     rating: {
         type: Number,
         required: true,
         default: 0,
-      },
-      numReviews: {
+    },
+    numReviews: {
         type: Number,
         required: true,
         default: 0,
-      },
+    },
 
-},{timestamps:true})
+}, {timestamps: true})
 
-const Blog=mongoose.model('Blogs',blogSchema)
+const Blog = mongoose.model('Blogs', blogSchema)
 // module.exports=Blogs
 export default Blog

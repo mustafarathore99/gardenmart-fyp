@@ -28,7 +28,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, password,address,postalCode,phone,city } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -41,6 +41,10 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    address,
+    city,
+    postalCode,
+    phone
   })
 
   if (user) {
@@ -48,6 +52,10 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      address:user.address,
+      city:user.city,
+      postalCode:user.postalCode,
+      phone:user.phone,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     })
@@ -68,6 +76,10 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      address:user.address,
+      city:user.city,
+      postalCode:user.postalCode,
+      phone:user.phone,
       isAdmin: user.isAdmin,
     })
   } else {
@@ -85,6 +97,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name
     user.email = req.body.email || user.email
+    user.address = req.body.address || user.address
+    user.city = req.body.city || user.city
+    user.postalCode = req.body.postalCode || user.postalCode
+    user.phone = req.body.phone || user.phone
     if (req.body.password) {
       user.password = req.body.password
     }
@@ -95,6 +111,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      address: updatedUser.address,
+      city: updatedUser.city,
+      postalCode: updatedUser.postalCode,
+      phone: updatedUser.phone,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     })
@@ -150,6 +170,11 @@ const updateUser = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name
     user.email = req.body.email || user.email
+    user.address = req.body.address || user.address
+    user.city = req.body.city || user.city
+    user.postalCode = req.body.postalCode || user.postalCode
+    user.phone = req.body.phone || user.phone
+   
     user.isAdmin = req.body.isAdmin
 
     const updatedUser = await user.save()
@@ -158,6 +183,10 @@ const updateUser = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      address: updatedUser.address,
+      city: updatedUser.city,
+      postalCode: updatedUser.postalCode,
+      phone: updatedUser.phone,
       isAdmin: updatedUser.isAdmin,
     })
   } else {
